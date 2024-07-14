@@ -1,0 +1,23 @@
+{
+  "name": "proj",
+  "version": "1.0.0",
+  "main": "Server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/pa106/WebThuongMaiDienTu.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/pa106/WebThuongMaiDienTu/issues"
+  },
+  "homepage": "https://github.com/pa106/WebThuongMaiDienTu#readme",
+  "description": "",
+  "dependencies": {
+    "express": "4.19.2"
+  }
+}
