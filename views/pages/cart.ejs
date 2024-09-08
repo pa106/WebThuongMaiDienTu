@@ -1,0 +1,120 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Shopping Cart</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+            background-color: #f4f4f4;
+        }
+
+        h1 {
+            text-align: center;
+            color: #333;
+        }
+
+        table {
+            width: 80%;
+            margin: 0 auto;
+            border-collapse: collapse;
+            background-color: #fff;
+        }
+
+        table,
+        th,
+        td {
+            border: 1px solid #ccc;
+        }
+
+        th,
+        td {
+            padding: 15px;
+            text-align: left;
+        }
+
+        th {
+            background-color: #f2f2f2;
+        }
+
+        .total {
+            text-align: right;
+            font-weight: bold;
+        }
+
+        .checkout {
+            text-align: center;
+            margin-top: 20px;
+        }
+
+        .checkout button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+        }
+
+        .checkout button:hover {
+            background-color: #45a049;
+        }
+    </style>
+</head>
+
+<body>
+
+    <h1>Your Shopping Cart</h1>
+
+    <table>
+        <% cart.forEach(function(item){ %>
+            <tr>
+                <td>
+                    <div>
+                        <img src="images/<%= item.image %>" alt="<%= item.name %>">
+                        <div>
+                            <p>
+                                <%= item.name %>
+                            </p>
+                            <small><span>$</span>
+                                <%= item.price %>
+                            </small>
+                            <br>
+                            <form method="post" action="/remove">
+                                <input type="hidden" name="id" value="<%= item.id %>">
+                                <input type="submit" name="remove_btn" value="Remove">
+                            </form>
+                        </div>
+                    </div>
+                </td>
+                <td>
+                    <form method="post" action="/update-quantity">
+                        <input type="hidden" name="id" value="<%= item.id %>">
+                        <input type="number" name="quantity" value="<%= item.quantity %>" min="1">
+                        <input type="submit" name="edit_quantity" value="Update Quantity">
+                    </form>
+                </td>
+                <td>
+                    <span>$ <%= item.price * item.quantity %></span>
+                </td>
+            </tr>
+            <% }); %>
+                <tr>
+                    <td colspan="3" class="total">Total</td>
+                    <td>$ <%= total %>
+                    </td>
+                </tr>
+    </table>
+    <div class="checkout">
+        <form action="/buy" method="post">
+            <input type="hidden" name="total" value="<%=total %>">
+            <button type="submit">Buy</button>
+        </form>
+    </div>
+
+</body>
+
+</html>
